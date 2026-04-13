@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_gravity="bottom"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#00BF63">
+
+    <!--    this is the bottom navigation bar-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:gravity="center">
+
+        <!--        DASHBOARD-->
+        <LinearLayout
+            android:id="@+id/layout_dashboard"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageButton
+                android:id="@+id/btnemployeedashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:src="@drawable/person_24px"
+                android:scaleType="centerInside"
+                android:tint="@color/nav_color"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:id="@+id/txtemployeedasboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:textColor="@color/nav_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:duplicateParentState="true"/>
+        </LinearLayout>
+
+        <!--        Monitoring -->
+        <LinearLayout
+            android:id="@+id/layout_monitoring"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageButton
+                android:id="@+id/btnaddemployee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:src="@drawable/add_circle_24px"
+                android:scaleType="centerInside"
+                android:tint="@color/nav_color"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:id="@+id/txtaddemployee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add New Employee"
+                android:textColor="@color/nav_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:duplicateParentState="true"/>
+        </LinearLayout>
+
+        <!--        Settinggs-->
+        <LinearLayout
+            android:id="@+id/layout_setting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageButton
+                android:id="@+id/btnback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:src="@drawable/undo_24px"
+                android:scaleType="centerInside"
+                android:tint="@color/nav_color"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:id="@+id/txtback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:textColor="@color/nav_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:duplicateParentState="true"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

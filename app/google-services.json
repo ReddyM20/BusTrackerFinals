@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "581164970374",
+    "project_id": "finalsprojectbus",
+    "storage_bucket": "finalsprojectbus.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581164970374:android:bd7f6b812f052ccd277c07",
+        "android_client_info": {
+          "package_name": "usc.edu.bustrackerfinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjPE9XHZ-k31HSvCANZLphFYsgNWDBQwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
