@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BustrackerFinal">
         <activity
+            android:name=".EditRoute"
+            android:exported="false" />
+        <activity
             android:name=".MoreDetails"
             android:exported="false" />
         <activity

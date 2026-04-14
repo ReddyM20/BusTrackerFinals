@@ -3,131 +3,49 @@ package usc.edu.bustrackerfinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.database.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AssigningDriver extends AppCompatActivity {
+    private Spinner spinnerRouteCode, spinnerDeparture, spinnerDriver, spinnerConductor;
+    private EditText editTerminal1, editTerminal2, editPlate, editContact;
+    private DatabaseReference routesRef, employeesRef;
+    private LinearLayout layoutDashboard, layoutAddRoute, layoutBack;
 
-    private Spinner spinnerRouteCode, spinnerDeparture;
-    private EditText editTerminal1, editTerminal2, editPlate, editDriver, editConductor, editContact;
-    private Button btnAddTrip;
-
-    // Navigation bar layouts
-    private LinearLayout layoutDashboard, layoutAddRoute, layoutAssignedDriver, layoutBack;
-
-    private DatabaseReference routesRef, tripsRef;
-    private final String DB_URL = "https://finalsprojectbus-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assigning_driver);
 
-        // Initialize Firebase
-        routesRef = FirebaseDatabase.getInstance(DB_URL).getReference("Routes");
-        tripsRef = FirebaseDatabase.getInstance(DB_URL).getReference("AssignedTrips");
+        routesRef = FirebaseDatabase.getInstance("https://finalsprojectbus-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Routes");
+        employeesRef = FirebaseDatabase.getInstance("https://finalsprojectbus-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Employees");
 
         initViews();
-        setupStaticSpinners();
+        loadEmployees();
         loadRouteCodes();
-        setupNavClickListeners(); // Added Nav Listeners
+        setupDepartureSpinner();
+        setupNavClickListeners();
 
-        // Highlight current page in navigation bar
-        if (layoutAssignedDriver != null) {
-            layoutAssignedDriver.setSelected(true);
-        }
-
-        btnAddTrip.setOnClickListener(v -> saveAssignedTrip());
+        findViewById(R.id.btnAddTrip).setOnClickListener(v -> saveTrip());
     }
 
     private void initViews() {
         spinnerRouteCode = findViewById(R.id.spinnerRouteCode);
         spinnerDeparture = findViewById(R.id.spinnerDeparture);
+        spinnerDriver = findViewById(R.id.spinnerDriver);
+        spinnerConductor = findViewById(R.id.spinnerConductor);
         editTerminal1 = findViewById(R.id.editTerminal1);
         editTerminal2 = findViewById(R.id.editTerminal2);
         editPlate = findViewById(R.id.editPlate);
-        editDriver = findViewById(R.id.editDriver);
-        editConductor = findViewById(R.id.editConductor);
         editContact = findViewById(R.id.editContact);
-        btnAddTrip = findViewById(R.id.btnAddTrip);
-
-        // Navigation IDs from route_navbottons.xml
         layoutDashboard = findViewById(R.id.layout_dashboard);
         layoutAddRoute = findViewById(R.id.layout_addroute);
-        layoutAssignedDriver = findViewById(R.id.layout_assigneddriver);
         layoutBack = findViewById(R.id.layout_back);
-    }
-
-    private void setupNavClickListeners() {
-        if (layoutDashboard != null) {
-            layoutDashboard.setOnClickListener(v -> {
-                Intent intent = new Intent(this, RouteManagement.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-                finish();
-            });
-        }
-
-        if (layoutAddRoute != null) {
-            layoutAddRoute.setOnClickListener(v -> {
-                startActivity(new Intent(this, AddingNewRoute.class));
-                finish();
-            });
-        }
-
-        // layoutAssignedDriver is this activity, so we don't need a listener or can just scroll to top
-
-        if (layoutBack != null) {
-            layoutBack.setOnClickListener(v -> {
-                startActivity(new Intent(this, AdminDashboard.class));
-                finish();
-            });
-        }
-    }
-
-    private void setupStaticSpinners() {
-        String[] times = {"06:00 AM", "08:00 AM", "10:00 AM", "12:00 PM", "02:00 PM", "04:00 PM", "06:00 PM"};
-        ArrayAdapter<String> timeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, times);
-        spinnerDeparture.setAdapter(timeAdapter);
-    }
-
-    private void loadRouteCodes() {
-        routesRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> codes = new ArrayList<>();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    codes.add(ds.getKey());
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(AssigningDriver.this,
-                        android.R.layout.simple_spinner_item, codes);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerRouteCode.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(AssigningDriver.this, "Failed to load routes", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         spinnerRouteCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -141,6 +59,13 @@ public class AssigningDriver extends AppCompatActivity {
         });
     }
 
+    private void setupDepartureSpinner() {
+        String[] times = {"06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", 
+                         "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", 
+                         "04:00 PM", "05:00 PM", "06:00 PM"};
+        spinnerDeparture.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, times));
+    }
+
     private void fetchRouteDetails(String code) {
         routesRef.child(code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -149,6 +74,8 @@ public class AssigningDriver extends AppCompatActivity {
                 if (route != null) {
                     editTerminal1.setText(route.getTerminalStart());
                     editTerminal2.setText(route.getTerminalEnd());
+                    if (route.getPlateNumber() != null) editPlate.setText(route.getPlateNumber());
+                    if (route.getContactInfo() != null) editContact.setText(route.getContactInfo());
                 }
             }
 
@@ -157,31 +84,96 @@ public class AssigningDriver extends AppCompatActivity {
         });
     }
 
-    private void saveAssignedTrip() {
-        String code = spinnerRouteCode.getSelectedItem().toString();
-        String plate = editPlate.getText().toString().trim();
-        String driver = editDriver.getText().toString().trim();
-        String conductor = editConductor.getText().toString().trim();
-        String contact = editContact.getText().toString().trim();
-        String time = spinnerDeparture.getSelectedItem().toString();
+    private void loadEmployees() {
+        employeesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> drivers = new ArrayList<>(), conductors = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Employee emp = ds.getValue(Employee.class);
+                    if (emp != null) {
+                        if ("Driver".equalsIgnoreCase(emp.getRole())) drivers.add(emp.getName());
+                        else if ("Conductor".equalsIgnoreCase(emp.getRole())) conductors.add(emp.getName());
+                    }
+                }
+                spinnerDriver.setAdapter(new ArrayAdapter<>(AssigningDriver.this, android.R.layout.simple_spinner_dropdown_item, drivers));
+                spinnerConductor.setAdapter(new ArrayAdapter<>(AssigningDriver.this, android.R.layout.simple_spinner_dropdown_item, conductors));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
 
-        if (plate.isEmpty() || driver.isEmpty()) {
-            Toast.makeText(this, "Please fill in Plate Number and Driver", Toast.LENGTH_SHORT).show();
+    private void loadRouteCodes() {
+        routesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> codes = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) codes.add(ds.getKey());
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(AssigningDriver.this, android.R.layout.simple_spinner_dropdown_item, codes);
+                spinnerRouteCode.setAdapter(adapter);
+
+                String preSelectedRoute = getIntent().getStringExtra("ROUTE_CODE");
+                if (preSelectedRoute != null) {
+                    int pos = adapter.getPosition(preSelectedRoute);
+                    if (pos >= 0) spinnerRouteCode.setSelection(pos);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    private void saveTrip() {
+        if (spinnerRouteCode.getSelectedItem() == null) {
+            Toast.makeText(this, "Please select a route code", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (spinnerDriver.getSelectedItem() == null) {
+            Toast.makeText(this, "Please select a driver", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (spinnerConductor.getSelectedItem() == null) {
+            Toast.makeText(this, "Please select a conductor", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (spinnerDeparture.getSelectedItem() == null) {
+            Toast.makeText(this, "Please select a departure time", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Route assignedTrip = new Route(
-                code,
-                editTerminal1.getText().toString(),
-                editTerminal2.getText().toString(),
-                "", "Active", time, plate, driver, conductor, contact
-        );
+        String code = spinnerRouteCode.getSelectedItem().toString();
+        // Update the main route node with driver/plate info
+        routesRef.child(code).child("plateNumber").setValue(editPlate.getText().toString());
+        routesRef.child(code).child("assignedDriver").setValue(spinnerDriver.getSelectedItem().toString());
+        routesRef.child(code).child("assignedConductor").setValue(spinnerConductor.getSelectedItem().toString());
+        routesRef.child(code).child("departureTime").setValue(spinnerDeparture.getSelectedItem().toString());
+        routesRef.child(code).child("contactInfo").setValue(editContact.getText().toString());
 
-        tripsRef.child(plate).setValue(assignedTrip)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Trip Assigned Successfully!", Toast.LENGTH_SHORT).show();
-                    finish();
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        Toast.makeText(this, "Trip Assigned!", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private void setupNavClickListeners() {
+        if (layoutDashboard != null) {
+            layoutDashboard.setOnClickListener(v -> {
+                startActivity(new Intent(this, RouteManagement.class));
+                finish();
+            });
+        }
+
+        if (layoutAddRoute != null) {
+            layoutAddRoute.setOnClickListener(v -> {
+                startActivity(new Intent(this, AddingNewRoute.class));
+                finish();
+            });
+        }
+
+        if (layoutBack != null) {
+            layoutBack.setOnClickListener(v -> {
+                startActivity(new Intent(this, AdminDashboard.class));
+                finish();
+            });
+        }
     }
 }
