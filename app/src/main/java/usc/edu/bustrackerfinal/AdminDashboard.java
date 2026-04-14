@@ -8,6 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+
 public class AdminDashboard extends AppCompatActivity {
 
     TextView txtEmployeeCount, txtRouteCount;
@@ -46,8 +49,8 @@ public class AdminDashboard extends AppCompatActivity {
 
         // Middle Route Button
         btnRouteManagement.setOnClickListener(v -> {
-            // Replace with your Route activity when ready
-            Toast.makeText(this, "Route Management Opening...", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AdminDashboard.this, RouteManagement.class);
+            startActivity(intent);
         });
 
         // Middle Employee Button (FIXED)

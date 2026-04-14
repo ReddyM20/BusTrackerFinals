@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:layout_gravity="bottom"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#00BF63">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/layout_dashboard"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:src="@drawable/bus_railway_24px"
+                android:scaleType="centerInside"
+                android:tint="@color/nav_color"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:textSize="12sp"
+                android:textColor="@color/nav_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:duplicateParentState="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_addroute"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:src="@drawable/add_circle_24px"
+                android:scaleType="centerInside"
+                android:tint="@color/nav_color"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add New Route"
+                android:textSize="10sp"
+                android:textColor="@color/nav_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:duplicateParentState="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_assigneddriver"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:src="@drawable/person_24px"
+                android:scaleType="centerInside"
+                android:tint="@color/nav_color"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assigned Driver"
+                android:textSize="10sp"
+                android:textColor="@color/nav_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:duplicateParentState="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:src="@drawable/undo_24px"
+                android:scaleType="centerInside"
+                android:tint="@color/nav_color"
+                android:duplicateParentState="true"
+                android:clickable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:textSize="12sp"
+                android:textColor="@color/nav_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:duplicateParentState="true"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

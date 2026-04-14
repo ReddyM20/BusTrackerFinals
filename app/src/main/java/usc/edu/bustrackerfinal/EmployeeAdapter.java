@@ -1,5 +1,6 @@
 package usc.edu.bustrackerfinal;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
 
         // Action button click (Edit/Settings)
         holder.btnEdit.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Editing: " + employee.getName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), EditingEmployee.class);
+            // Pass the unique ID to the next activity
+            intent.putExtra("EMPLOYEE_ID", employee.getId());
+            v.getContext().startActivity(intent);
         });
     }
 

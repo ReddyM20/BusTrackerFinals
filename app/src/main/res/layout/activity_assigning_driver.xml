@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AssigningDriver"
+    android:background="#77BF9C">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:background="@drawable/top_design">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Assigning Driver"
+            android:textSize="35sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header"
+        android:layout_above="@id/nav_wrapper"
+        android:padding="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Route Code" android:textStyle="bold" android:textColor="@android:color/black"/>
+                <Spinner android:id="@+id/spinnerRouteCode" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/edit_text_border" android:layout_marginBottom="10dp"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Terminal 1 (Start Point)" android:textStyle="bold" android:textColor="@android:color/black"/>
+                <EditText android:id="@+id/editTerminal1" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="origin" android:enabled="false" android:background="@drawable/edit_text_border" android:padding="10dp" android:layout_marginBottom="10dp"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Terminal 2 (End Point)" android:textStyle="bold" android:textColor="@android:color/black"/>
+                <EditText android:id="@+id/editTerminal2" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="destination" android:enabled="false" android:background="@drawable/edit_text_border" android:padding="10dp" android:layout_marginBottom="10dp"/>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="5dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Departure Time" android:textStyle="bold" android:textColor="@android:color/black"/>
+                        <Spinner android:id="@+id/spinnerDeparture" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/edit_text_border"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="5dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Plate Number" android:textStyle="bold" android:textColor="@android:color/black"/>
+                        <EditText android:id="@+id/editPlate" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="ABD123" android:background="@drawable/edit_text_border" android:padding="10dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Assigned Driver" android:textStyle="bold" android:layout_marginTop="10dp" android:textColor="@android:color/black"/>
+                <EditText android:id="@+id/editDriver" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Juan Dela Cruz" android:background="@drawable/edit_text_border" android:padding="10dp" android:layout_marginBottom="10dp"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Assigned Conductor" android:textStyle="bold" android:textColor="@android:color/black"/>
+                <EditText android:id="@+id/editConductor" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Pedro Garcia" android:background="@drawable/edit_text_border" android:padding="10dp" android:layout_marginBottom="10dp"/>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contact Info:" android:textStyle="bold" android:textColor="@android:color/black"/>
+                <EditText android:id="@+id/editContact" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="+63***********" android:inputType="phone" android:background="@drawable/edit_text_border" android:padding="10dp" android:layout_marginBottom="20dp"/>
+
+                <Button
+                    android:id="@+id/btnAddTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Trip"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#00BF63"
+                    android:layout_gravity="end"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/nav_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <include layout="@layout/route_navbottons"/>
+    </LinearLayout>
+
+</RelativeLayout>

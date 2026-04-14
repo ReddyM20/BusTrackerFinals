@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BustrackerFinal">
         <activity
+            android:name=".MoreDetails"
+            android:exported="false" />
+        <activity
+            android:name=".AssigningDriver"
+            android:exported="false" />
+        <activity
+            android:name=".AddingNewRoute"
+            android:exported="false" />
+        <activity
+            android:name=".RouteManagement"
+            android:exported="false" />
+        <activity
+            android:name=".EditingEmployee"
+            android:exported="false" />
+        <activity
             android:name=".AddingEmployee"
             android:exported="false" />
         <activity

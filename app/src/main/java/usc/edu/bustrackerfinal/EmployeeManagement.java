@@ -3,91 +3,70 @@ package usc.edu.bustrackerfinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeManagement extends AppCompatActivity {
 
-    private LinearLayout layoutDashboard, layoutAddEmployee, layoutBack;
     private RecyclerView rvEmployeeList;
     private EmployeeAdapter adapter;
-    private List<Employee> employeeList; // This holds your original full list
+    private List<Employee> employeeList;
+    private DatabaseReference dbRef;
+    private final String DB_URL = "https://finalsprojectbus-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_management);
 
-        initViews();
-        setupRecyclerView();
-        setupSearchLogic(); // Initialize Search
-        setupNavClickListeners();
-    }
+        dbRef = FirebaseDatabase.getInstance(DB_URL).getReference("Employees");
 
-    private void initViews() {
         rvEmployeeList = findViewById(R.id.rvEmployeeList);
-        layoutDashboard = findViewById(R.id.layout_dashboard);
-        layoutAddEmployee = findViewById(R.id.layout_monitoring);
-        layoutBack = findViewById(R.id.layout_setting);
-        layoutAddEmployee.setSelected(true);
-    }
-
-    private void setupRecyclerView() {
-        employeeList = new ArrayList<>();
-        employeeList.add(new Employee("E001", "Juan Dela Cruz", "Driver"));
-        employeeList.add(new Employee("E002", "Maria Santos", "Conductor"));
-        employeeList.add(new Employee("E003", "Pedro Penduko", "Admin"));
-        employeeList.add(new Employee("E004", "John Wick", "Driver"));
-
-        adapter = new EmployeeAdapter(employeeList);
         rvEmployeeList.setLayoutManager(new LinearLayoutManager(this));
+
+        employeeList = new ArrayList<>();
+        adapter = new EmployeeAdapter(employeeList);
         rvEmployeeList.setAdapter(adapter);
+
+        // Fetch Data from Firebase
+        fetchEmployees();
+
+        // Setup Nav
+        findViewById(R.id.layout_monitoring).setOnClickListener(v -> {
+            startActivity(new Intent(this, AddingEmployee.class));
+        });
+        findViewById(R.id.layout_setting).setOnClickListener(v -> finish());
     }
 
-    private void setupSearchLogic() {
-        SearchView searchView = findViewById(R.id.searchEmployee);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    private void fetchEmployees() {
+        dbRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                employeeList.clear(); // Clear old data
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Employee emp = data.getValue(Employee.class);
+                    if (emp != null) {
+                        employeeList.add(emp);
+                    }
+                }
+                adapter.notifyDataSetChanged(); // Refresh the table
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                // This triggers every time a letter is typed or deleted
-                filterList(newText);
-                return true;
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
             }
         });
-    }
-
-    private void filterList(String text) {
-        List<Employee> filteredList = new ArrayList<>();
-
-        for (Employee employee : employeeList) {
-            // Check if the employee name contains the searched text (ignoring case)
-            if (employee.getName().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(employee);
-            }
-        }
-
-        // Send the filtered list to the adapter to update the screen
-        adapter.setFilteredList(filteredList);
-    }
-
-    private void setupNavClickListeners() {
-        layoutDashboard.setOnClickListener(v -> rvEmployeeList.smoothScrollToPosition(0));
-
-        layoutAddEmployee.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddingEmployee.class);
-            startActivity(intent);
-        });
-
-        layoutBack.setOnClickListener(v -> finish());
     }
 }

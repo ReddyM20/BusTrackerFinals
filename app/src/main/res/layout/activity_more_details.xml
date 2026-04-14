@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MoreDetails"
+    android:background="#77BF9C">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/arrow_back_24px"
+        app:tint="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/title_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnBack"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Route Code:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvDetailRouteCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100012268"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_container"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="#D9D9D9"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:id="@+id/details_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView android:id="@+id/tvDetailStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Status: Active" android:textColor="@color/black" android:layout_marginBottom="8dp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvDetailPlate" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Plate Number:" android:textColor="@color/black" android:layout_marginBottom="8dp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvDetailTerminal1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Terminal 1 (Starting Point):" android:textColor="@color/black" android:layout_marginBottom="8dp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvDetailTerminal2" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Terminal 2 (Ending Point):" android:textColor="@color/black" android:layout_marginBottom="8dp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvDetailDeparture" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Assigned Departure Time:" android:textColor="@color/black" android:layout_marginBottom="8dp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvDetailDistance" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Distance:" android:textColor="@color/black" android:layout_marginBottom="12dp" android:textStyle="bold"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/black" android:layout_marginBottom="12dp"/>
+
+                <TextView android:id="@+id/tvDetailDriver" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Assigned Driver:" android:textColor="@color/black" android:layout_marginBottom="8dp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvDetailConductor" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Assigned Conductor:" android:textColor="@color/black" android:layout_marginBottom="8dp" android:textStyle="bold"/>
+                <TextView android:id="@+id/tvDetailContact" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Contact Info:" android:textColor="@color/black" android:layout_marginBottom="12dp" android:textStyle="bold"/>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/black" android:layout_marginBottom="20dp"/>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnEditDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/details_list"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/edit_button_bg"
+                android:text="Edit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/edit_24px"
+                android:drawablePadding="8dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
