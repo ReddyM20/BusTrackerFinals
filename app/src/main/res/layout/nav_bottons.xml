@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:background="#00BF63"
-    android:orientation="horizontal">
+    android:layout_height="72dp"
+    android:background="@color/cardBackground"
+    android:orientation="horizontal"
+    android:paddingHorizontal="8dp">
 
     <LinearLayout
         android:id="@+id/layout_dashboard"
@@ -14,22 +15,26 @@
         android:orientation="vertical"
         android:gravity="center"
         android:clickable="true"
-        android:focusable="true">
-        <ImageButton
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
             android:background="@drawable/pill_background"
             android:src="@drawable/bus_railway_24px"
             app:tint="@color/nav_color"
-            android:duplicateParentState="true"
-            android:clickable="false" />
+            android:duplicateParentState="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dashboard"
             android:textColor="@color/nav_color"
-            android:textStyle="bold"
-            android:duplicateParentState="true"/>
+            android:textSize="11sp"
+            android:layout_marginTop="2dp"
+            android:duplicateParentState="true"
+            android:fontFamily="sans-serif-medium"/>
     </LinearLayout>
 
     <LinearLayout
@@ -40,22 +45,26 @@
         android:orientation="vertical"
         android:gravity="center"
         android:clickable="true"
-        android:focusable="true">
-        <ImageButton
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
             android:background="@drawable/pill_background"
             android:src="@drawable/location_on_24px"
             app:tint="@color/nav_color"
-            android:duplicateParentState="true"
-            android:clickable="false" />
+            android:duplicateParentState="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Monitoring"
             android:textColor="@color/nav_color"
-            android:textStyle="bold"
-            android:duplicateParentState="true"/>
+            android:textSize="11sp"
+            android:layout_marginTop="2dp"
+            android:duplicateParentState="true"
+            android:fontFamily="sans-serif-medium"/>
     </LinearLayout>
 
     <LinearLayout
@@ -66,21 +75,25 @@
         android:orientation="vertical"
         android:gravity="center"
         android:clickable="true"
-        android:focusable="true">
-        <ImageButton
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
             android:background="@drawable/pill_background"
             android:src="@drawable/settings_24px"
             app:tint="@color/nav_color"
-            android:duplicateParentState="true"
-            android:clickable="false" />
+            android:duplicateParentState="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Settings"
             android:textColor="@color/nav_color"
-            android:textStyle="bold"
-            android:duplicateParentState="true"/>
+            android:textSize="11sp"
+            android:layout_marginTop="2dp"
+            android:duplicateParentState="true"
+            android:fontFamily="sans-serif-medium"/>
     </LinearLayout>
 </LinearLayout>

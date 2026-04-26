@@ -1,64 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RouteManagement">
+    tools:context=".RouteManagement"
+    android:background="@color/backgroundGray">
 
-    <LinearLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:orientation="vertical"
-        android:background="@drawable/top_design">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ROUTE MANAGEMENT"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:gravity="center"/>
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/search_card"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/header"
-        android:layout_margin="15dp"
-        app:cardBackgroundColor="#D9D9D9"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="2dp">
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchRoute"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:iconifiedByDefault="false"
-            app:queryHint="Search route..."
-            app:queryBackground="@android:color/transparent" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRouteList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/search_card"
-        android:layout_above="@id/nav_wrapper"
-        android:layout_marginHorizontal="10dp"
-        android:paddingBottom="10dp"
-        android:clipToPadding="false"/>
-
-    <LinearLayout
-        android:id="@+id/nav_wrapper"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <include layout="@layout/route_navbottons"/>
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:orientation="vertical"
+            android:background="@drawable/top_design"
+            android:padding="24dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Route Management"
+                android:textSize="28sp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-medium"/>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/search_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/cardBackground">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchRoute"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search routes..."
+                app:queryBackground="@android:color/transparent" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRouteList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:clipToPadding="false"
+            android:paddingBottom="100dp"/>
+
     </LinearLayout>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:strokeWidth="0dp">
+        <include layout="@layout/route_navbottons"/>
+    </com.google.android.material.card.MaterialCardView>
 
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

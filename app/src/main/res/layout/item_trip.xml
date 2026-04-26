@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/surfaceContainer"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView android:id="@+id/tvFromTerminal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="From Terminal:" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+        <TextView android:id="@+id/tvFromTerminalVal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="South Terminal" android:textColor="@color/textDark" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+
+        <TextView android:id="@+id/tvToTerminal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="To Terminal:" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+        <TextView android:id="@+id/tvToTerminalVal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="North Terminal" android:textColor="@color/textDark" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+
+        <TextView android:id="@+id/tvDepartureTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Departure Time:" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+        <TextView android:id="@+id/tvDepartureTimeVal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="09:00 AM" android:textColor="@color/textDark" android:textStyle="bold" android:layout_marginBottom="4dp"/>
+
+        <TextView android:id="@+id/tvTripStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trip Status:" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+        <TextView android:id="@+id/tvTripStatusVal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Completed" android:textColor="@color/primaryGreen" android:textStyle="bold"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

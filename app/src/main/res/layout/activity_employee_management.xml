@@ -1,78 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EmployeeManagement"
-    android:background="#77BF9C">
+    android:background="@color/backgroundGray">
 
-    <LinearLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:orientation="vertical"
-        android:background="@drawable/top_design">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="EMPLOYEE LIST"
-            android:textSize="35sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:gravity="center"/>
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/search_card"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/header"
-        android:layout_margin="15dp"
-        app:cardBackgroundColor="#D9D9D9"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="2dp">
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchEmployee"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:iconifiedByDefault="false"
-            app:queryHint="Search employee..."
-            app:queryBackground="@android:color/transparent" />
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/table_header"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/search_card"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="#D9D9D9">
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="ID" android:textStyle="bold" android:textColor="@android:color/black" />
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="2" android:text="Name" android:textStyle="bold" android:textColor="@android:color/black" />
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5" android:text="Role" android:textStyle="bold" android:textColor="@android:color/black" />
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Action" android:textStyle="bold" android:textColor="@android:color/black" android:gravity="center" />
-    </LinearLayout>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEmployeeList"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@drawable/top_design"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Employee"
+                    android:textSize="16sp"
+                    android:textColor="#E0E0E0"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Management"
+                    android:textSize="32sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif-black"/>
+            </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/table_header"
-        android:layout_above="@id/nav_wrapper"
-        android:layout_marginHorizontal="10dp"
-        android:background="#EFEFEF"/>
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="-40dp">
 
-    <LinearLayout
-        android:id="@+id/nav_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <include layout="@layout/employee_navbottons"/>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/white">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchEmployee"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search employees..."
+                app:queryBackground="@android:color/transparent"
+                app:searchIcon="@drawable/search_24px"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvEmployeeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="12dp"
+            android:clipToPadding="false"
+            android:paddingBottom="100dp"/>
+
     </LinearLayout>
 
-</RelativeLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:strokeWidth="0dp">
+        <include layout="@layout/employee_navbottons"/>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
