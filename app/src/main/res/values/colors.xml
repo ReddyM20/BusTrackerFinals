@@ -14,4 +14,9 @@
     <color name="nav_selected_pill">#C8E6C9</color>
     <color name="onSurfaceVariant">#44474E</color>
     <color name="surfaceContainer">#F0F3F1</color>
+
+    <!-- Chatbot Colors -->
+    <color name="chat_bg_bot">#F3F3F3</color>
+    <color name="chat_text_bot">#333333</color>
+    <color name="chat_text_user">#FFFFFF</color>
 </resources>
