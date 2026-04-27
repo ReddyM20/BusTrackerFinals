@@ -5,11 +5,7 @@ plugins {
 
 android {
     namespace = "usc.edu.bustrackerfinal"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "usc.edu.bustrackerfinal"
@@ -44,6 +40,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.recyclerview)
     implementation(libs.cardview)
+    implementation(libs.flexbox)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
